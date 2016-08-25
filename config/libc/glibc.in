@@ -54,15 +54,15 @@ config CC_GLIBC_SHOW_LINARO
     help
       Linaro is maintaining some advanced/more stable/experimental versions
       of glibc, especially for the ARM architecture.
-      
+
       Those versions have not been blessed by the glibc comunity (nor have they
       been cursed either!), but they look to be pretty much stable, and even
       more stable than the upstream versions. YMMV...
-      
+
       If you do not know what this Linaro stuff is, then simply say 'n' here,
       and rest in peace. OTOH, if you know what you are doing, you will be
       able to use and enjoy :-) the Linaro versions by saying 'y' here.
-      
+
       Linaro: http://www.linaro.org/
 
 choice
@@ -70,6 +70,11 @@ choice
     prompt "glibc version"
 # Don't remove next line
 # CT_INSERT_VERSION_BELOW
+
+config LIBC_GLIBC_V_2_24
+    bool
+    prompt "2.24"
+    select LIBC_GLIBC_2_24_or_later
 
 config LIBC_GLIBC_V_2_23
     bool
@@ -125,6 +130,7 @@ config LIBC_VERSION
     string
 # Don't remove next line
 # CT_INSERT_VERSION_STRING_BELOW
+    default "2.24" if LIBC_GLIBC_V_2_24
     default "2.23" if LIBC_GLIBC_V_2_23
     default "2.22" if LIBC_GLIBC_V_2_22
     default "2.21" if LIBC_GLIBC_V_2_21
